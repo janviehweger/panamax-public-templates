@@ -1,0 +1,33 @@
+---
+name: Typo3 with MariaDB
+description: Typo3 container linked to a MariaDB container
+keywords: typo3, mariadb, public
+documentation: |
+  Typo3 with MariaDB
+  ============================
+
+  This is a panamaxe template of hbokh's "Docker TYPO3 CMS" image. For details see https://registry.hub.docker.com/u/hbokh/docker-typo3-cms/
+
+  To view the GUI after launching the template go to http://10.0.0.200:80
+
+
+images:
+- name: typo3-cms
+  source: hbokh/docker-typo3-cms:latest
+  category: Web Tier
+  type: Default
+  ports:
+  - host_port: 80
+    container_port: 80
+  links:
+  - service: mariadb
+    alias: db
+- name: mariadb
+  source: paintedfox/mariadb:latest
+  category: DB Tier
+  type: Default
+  environment:
+  - variable: USER
+    value: mariadb
+  - variable: PASS
+    value: p4ssw0rd
